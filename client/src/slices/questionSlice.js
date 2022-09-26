@@ -1,6 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from '../api/';
 
+export const loadQuestions = createAsyncThunk('questions/fetchAllQuestions',
+    async () =>{
+        const allQues = await api.fetchAllQuestions();
+        return allQues.data;
+    }
+)
+
 export const addQuestion = createAsyncThunk('questions/addQuestion',
     async (question) =>{
         const res = await api.addQuestion(question);
@@ -20,6 +27,9 @@ export const questionSlice = createSlice({
     extraReducers:{
         [addQuestion.fulfilled](state, { payload }){
             state.questions = [...state.questions, payload];
+        },
+        [loadQuestions.fulfilled](state, { payload }){
+            state.questions = payload;
         }
     }
 })

@@ -7,6 +7,7 @@ import Answers from './components/Answers/Answers';
 import QuestionForm from './components/QuestionForm/QuestionForm';
 import theme from './theme';
 import { loadAns } from './slices/answerSlice';
+import { loadQuestions } from './slices/questionSlice';
 
 //import SignIn from './components/SignIn/SignIn';
 
@@ -18,7 +19,9 @@ const App = () => {
 
     useEffect(() => {
         dispatch(loadAns());
-    },[])
+        dispatch(loadQuestions());
+        
+    })
 
     return(
         //<SignIn></SignIn>

@@ -9,11 +9,13 @@ import App from "./App.js";
 //import userReducer from "./reducers/userReducer";
 //import qReducer from "./reducers/qReducer";
 //import aReducer from './reducers/aReducer';
-import answerRedcuer from '../src/slices/answerSlice';
+import answerRedcuer from './slices/answerSlice';
+import questionReducer from './slices/questionSlice';
 
 const store = configureStore({
     reducer: {
         answers: answerRedcuer,
+        questions: questionReducer,
     }
 })
 
