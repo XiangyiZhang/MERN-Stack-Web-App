@@ -10,7 +10,7 @@ export const createUser = async (req, res) => {
     console.log(req.body);
     const hash = await bcrypt.hash(password, ROUNDS);
 
-    const newUser = new User({username, hash});
+    const newUser = new User({username, password: hash});
     try{
         await newUser.save();
         res.status(201).json({

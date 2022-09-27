@@ -2,12 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from '../api/';
 
 export const signIn = createAsyncThunk('auth/signIn',
-    async (formData) =>{
+    async (formData, {rejectWithValue}) =>{
         try{
             const res = await api.signIn(formData);
+            console.log(res.data);
             return res.data;
         }catch(error){
-            console.log(error);
+            return rejectWithValue(error.response.data);
         }
     }
 )
@@ -28,7 +29,6 @@ export const authSlice = createSlice({
     initialState:{
         user: null,
         token: null,
-        error: null,
     },
     reducers:{},
     extraReducers:{
@@ -47,6 +47,5 @@ export const authSlice = createSlice({
 })
 
 export const selectUser = (state) => state.user;
-export const selectError = (state) => state.error;
 
 export default authSlice.reducer;

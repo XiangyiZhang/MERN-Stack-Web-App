@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Link, Box, Button, Avatar, CssBaseline, TextField, Container, Typography } from '@mui/material';
+import { Modal, Box, Button, Avatar, CssBaseline, TextField, Container, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { signIn, signUp, selectError } from '../../slices/authSlice';
+import { signIn, signUp} from '../../slices/authSlice';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -40,7 +40,7 @@ export default function SignInForm({open, handleClose}) {
       }
     }
     const data = {
-      uername: formData.get('username'),
+      username: formData.get('username'),
       password: formData.get('password'),
     }
 
