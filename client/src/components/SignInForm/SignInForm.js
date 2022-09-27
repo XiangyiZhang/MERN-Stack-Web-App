@@ -1,5 +1,5 @@
-import * as React from 'react';
-
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Modal, Link, Box, Button, Avatar, CssBaseline, TextField, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
@@ -20,9 +20,14 @@ const style = {
 };
 
 export default function SignInForm({open, handleClose}) {
+  const [isSignIn, setIsSignIn] = useState(false);
+
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+  
     console.log({
       email: data.get('email'),
       password: data.get('password'),
