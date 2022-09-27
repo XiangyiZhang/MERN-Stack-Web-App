@@ -9,12 +9,16 @@ import theme from './theme';
 import { loadAns } from './slices/answerSlice';
 import { loadQuestions } from './slices/questionSlice';
 
-//import SignIn from './components/SignIn/SignIn';
+import SignInForm from './components/SignInForm/SignInForm';
 
 const App = () => {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [openQuestionForm, setOpenQuestionForm] = React.useState(false);
+    const handleOpenQuestionForm = () => setOpenQuestionForm(true);
+    const handleCloseQuestionForm = () => setOpenQuestionForm(false);
+    const [openSigninForm, setOpenSigninForm] = React.useState(false);
+    const handleOpenSigninForm = () => setOpenSigninForm(true);
+    const handleCloseSigninForm = () => setOpenSigninForm(false);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,16 +36,25 @@ const App = () => {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 0.73 }}>
                             Quohoo
                         </Typography>
-                        <Button onClick={handleOpen} size='small'sx={{
+                        <Button onClick={handleOpenQuestionForm} size='small'sx={{
+                            
                             bgcolor: 'button.ask',
                             borderRadius:5,
                             '&:hover': {bgcolor: 'button.hover'}
-                            }}>Add Questions</Button>
+                            }}>Add Questions
+                        </Button>
+                        <Button onClick={handleOpenSigninForm} size='small'sx={{
+                            bgcolor: 'button.ask',
+                            borderRadius:5,
+                            '&:hover': {bgcolor: 'button.hover'}
+                            }}>Sign In/Sign Up
+                        </Button>
                     </Toolbar>
                 </AppBar>
             </Box>
             <Answers/>
-            <QuestionForm open = {open} handleClose = {handleClose}/>
+            <QuestionForm open = {openQuestionForm} handleClose = {handleCloseQuestionForm}/>
+            <SignInForm open = {openSigninForm} handleClose = {handleCloseSigninForm}/>
         </ThemeProvider>
         
     )
