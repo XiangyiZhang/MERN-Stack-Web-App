@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Modal, Link, Box, Button, Avatar, CssBaseline, TextField, Container } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { Modal, Link, Box, Button, Avatar, CssBaseline, TextField, Container, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { signIn, signUp, selectError } from '../../slices/authSlice';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -20,18 +21,34 @@ const style = {
 };
 
 export default function SignInForm({open, handleClose}) {
-  const [isSignIn, setIsSignIn] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(true);
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const dispatch = useDispatch();
-
+  const switchMode = () => {
+    setIsSignIn((prevIsSignIn) => !prevIsSignIn);
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-  
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const formData = new FormData(event.currentTarget);
+    if(!isSignIn){
+      if(formData.get('password')!==formData.get('repeat')){
+        setPasswordMatch(false);
+        return;
+      }else{
+        setPasswordMatch(true);
+      }
+    }
+    const data = {
+      uername: formData.get('username'),
+      password: formData.get('password'),
+    }
+
+    if(isSignIn){
+      dispatch(signIn(data)).unwrap().then().catch((err)=>{console.log(err)});
+    }else{
+      dispatch(signUp(data));
+    }
   };
 
   return (
@@ -44,14 +61,16 @@ export default function SignInForm({open, handleClose}) {
               <LockOutlinedIcon />
             </Avatar>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus/>
-              <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"/>
+              <TextField margin="normal" required fullWidth id="username" label="Username" name="username" autoFocus/>
+              <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password"/>
+              {isSignIn ?<></>:<TextField margin="normal" required fullWidth name="repeat" label="Confirm Password" type="password" id="repeat"/>}
+              {passwordMatch || isSignIn?<></>:<Typography color='error' variant='body2'>Password does not match.</Typography>}
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Sign In
+              {isSignIn ? "Sign In" : "Sign Up"}
               </Button>
-              <Link href="#" variant="body2">
-                {"Don't have a Quohoo account? Sign Up"}
-              </Link>
+              <Button onClick={switchMode} sx={{textTransform: 'none'}}>
+                {isSignIn ? "Don't have a Quohoo account? Sign Up" : "Already have a Quohoo account? Sign in"}
+              </Button>
             </Box>
           </Box>
         </Container>
