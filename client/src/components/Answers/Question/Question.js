@@ -16,7 +16,7 @@ export default function Question({question}){
     });
     return(
         <ThemeProvider theme={theme}>
-            <Container sx={{width: 0.5 }}r>
+            <Container sx={{width: 800 }}r>
                 <Box 
                     sx={{
                         bgcolor: 'background.paper',

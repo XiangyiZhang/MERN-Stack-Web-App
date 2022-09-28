@@ -1,4 +1,4 @@
-import { Modal, Box, Button, TextField, InputAdornment, Fade } from '@mui/material';
+import { Modal, Box, Button, TextField, InputAdornment, Fade, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { addQuestion } from '../../api';
 
@@ -12,15 +12,26 @@ const style = {
     p: 4,
   };
 
-const QuestionForm = ({ open, handleClose }) => {
+const QuestionForm = ({user, token, open, handleClose }) => {
     const [ questionInfo, setQuestionInfo ] = useState({ title:'', description:'' });
     const handleSubmit = (event)=>{
-        addQuestion(questionInfo);
-        console.log({
-            title: questionInfo.title,
-            description: questionInfo.description,
+        addQuestion({
+            title: questionInfo.title, 
+            description: questionInfo.description, 
+            askedBy:user._id
         });
     };
+    if(!user){
+        return(
+            <Modal open={open} onClose={handleClose}>
+                <Fade in={open}>
+                    <Box sx={style}>
+                        <Typography variant='h6'>Please sign in before adding questions</Typography>
+                    </Box>
+                </Fade>
+            </Modal>
+        )
+    }
 
     return(
         <Modal

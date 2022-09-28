@@ -21,6 +21,7 @@ const style = {
 };
 
 export default function SignInForm({open, handleClose}) {
+  const [errMessage, setErrMessage] = useState('');
   const [isSignIn, setIsSignIn] = useState(true);
   const [passwordMatch, setPasswordMatch] = useState(true);
 
@@ -39,14 +40,24 @@ export default function SignInForm({open, handleClose}) {
         setPasswordMatch(true);
       }
     }
+
     const data = {
       username: formData.get('username'),
       password: formData.get('password'),
     }
 
+    if(!data.username || !data.password){
+      setErrMessage('Please fill all entries.');
+      return;
+    }
+
     if(isSignIn){
-      dispatch(signIn(data)).unwrap().then().catch((err)=>{console.log(err)});
-    }else{
+      dispatch(signIn(data)).unwrap().then().catch((err)=>{
+        console.log(err);
+        setErrMessage(err.message);
+      });
+      
+    }else{ 
       dispatch(signUp(data));
     }
   };
@@ -65,6 +76,7 @@ export default function SignInForm({open, handleClose}) {
               <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password"/>
               {isSignIn ?<></>:<TextField margin="normal" required fullWidth name="repeat" label="Confirm Password" type="password" id="repeat"/>}
               {passwordMatch || isSignIn?<></>:<Typography color='error' variant='body2'>Password does not match.</Typography>}
+              {!errMessage || !isSignIn?<></>:<Typography color='error' variant='body2'>{errMessage}</Typography>}
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               {isSignIn ? "Sign In" : "Sign Up"}
               </Button>

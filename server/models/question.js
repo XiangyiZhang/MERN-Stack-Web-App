@@ -4,7 +4,7 @@ const questionSchema = mongoose.Schema({
     title: String,
     description: String,
     tags: [String],
-    askedby: {type: mongoose.SchemaTypes.ObjectId, ref:'User'},
+    askedBy: {type: mongoose.SchemaTypes.ObjectId, ref:'User'},
     answers: [{type: mongoose.SchemaTypes.ObjectId, ref:'Answer'}],
     date: {
         type: Date,

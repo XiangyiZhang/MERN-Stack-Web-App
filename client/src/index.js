@@ -11,11 +11,14 @@ import App from "./App.js";
 //import aReducer from './reducers/aReducer';
 import answerRedcuer from './slices/answerSlice';
 import questionReducer from './slices/questionSlice';
+import authReducer from './slices/authSlice';
 
 const store = configureStore({
     reducer: {
         answers: answerRedcuer,
         questions: questionReducer,
+        user: authReducer,
+        token: authReducer,
     }
 })
 
