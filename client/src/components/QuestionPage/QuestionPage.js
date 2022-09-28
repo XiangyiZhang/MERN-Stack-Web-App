@@ -25,9 +25,13 @@ const QuestionPage = () => {
     return (
         <ThemeProvider theme={theme}>
             <Container sx={{width: 800, flexGrow:1}}>
-                <Box sx={{bgcolor: 'background.paper', padding: 2, boxShadow:8, border:2, borderColor:'common.black'}}>
+                <Box sx={{bgcolor: 'background.paper', mb: 1, padding: 2, boxShadow:8, border:1, borderColor:'grey.main'}}>
                     <Typography variant='h5' color = 'common.black' sx={{ fontWeight: 600 }}>
-                        Why Are Your So Handsome?
+                        这是个什么网站？
+                    </Typography>
+                </Box><Box sx={{bgcolor: 'background.paper', mb: 1, padding: 2, boxShadow:8, border:1, borderColor:'grey.main'}}>
+                    <Typography variant='h5' color = 'common.black' sx={{ fontWeight: 600 }}>
+                        这是个什么网站？
                     </Typography>
                 </Box>
             </Container>

@@ -15,12 +15,17 @@ const Answers = () => {
     return (
         !answers && !questions? <CircularProgress/> : (
             <>
-            {questions.map((ques, index) => (
-                <Question question={ques} key = {index}/>
-            ))}
-            {answers.map((ans, index) => (
-                <Answer ans={ans} key = {index}/>
-            ))}
+            <div style={{marginBottom:10}}>
+                {questions.map((ques, index) => (
+                    <Question question={ques} key = {index}/>
+                ))}
+            </div>
+            <div>
+                {answers.map((ans, index) => (
+                    <Answer ans={ans} key = {index}/>
+                ))}
+            </div>
+            
             </>
             
         )

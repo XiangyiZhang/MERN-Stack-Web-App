@@ -9,6 +9,7 @@ export default function Question({question}){
             grey: {
               main: '#9e9e9e',
               dark: '#616161',
+              light: '#cccccc',
             },
             background: {
               paper: '#fff',
@@ -24,7 +25,8 @@ export default function Question({question}){
                         pt: 1,
                         pl: 2,
                         pr: 2,
-                        boxShadow:8, border:4, borderBotton:2, borderTop:2, borderColor:'common.black'
+                        pb: 1,
+                        boxShadow:8, borderBottom:1, borderColor:'grey.light'
                     }}>
                     <Typography variant='body2' color = 'grey.dark' sx={{  }}>
                         A question is waiting for your answer
@@ -32,7 +34,6 @@ export default function Question({question}){
                     <LinkMaterial variant='subtitle1' component={LinkReactRouter} to={`/question/${question._id}`} sx={{ fontWeight: 'bold', color:"common.black", textDecoration: "none", "&:hover": {}}} >
                         {question.title}
                     </LinkMaterial>
-                    <Divider/>
                 </Box>
             </Container>
         </ThemeProvider>

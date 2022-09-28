@@ -24,14 +24,15 @@ const NavBar = ({user, token, handleOpenQuestionForm, handleOpenSigninForm}) => 
                             position: 'relative', left: '80%',
                             bgcolor: 'button.ask',
                             borderRadius:2,
-                            '&:hover': {bgcolor: 'button.hover', borderRadius:5}
+                            boxShadow: 1,
+                            '&:hover': {bgcolor: 'button.hover', borderRadius:5, boxShadow: 2,}
                             }}>Add Question
                         </Button>
                         {!user?
-                            <Button onClick={handleOpenSigninForm} size='mid'sx={{ color:'common.black', position: 'absolute', left: 200, bgcolor: 'button.ask', borderRadius:2, whiteSpace: 'nowrap', minWidth: 'auto', '&:hover': {bgcolor: 'button.hover', borderRadius:5}
+                            <Button onClick={handleOpenSigninForm} size='mid'sx={{ color:'common.black', position: 'absolute', left: 200, bgcolor: 'button.ask', borderRadius:2, whiteSpace: 'nowrap', boxShadow: 1,minWidth: 'auto', '&:hover': {bgcolor: 'button.hover', borderRadius:5, boxShadow: 1}
                                 }}>Sign In/Sign Up
                             </Button> :
-                            <Button onClick={handleSignOut} size='mid'sx={{ color:'common.black', position: 'absolute', left: 200, bgcolor: 'button.ask', borderRadius:2, whiteSpace: 'nowrap', minWidth: 'auto', '&:hover': {bgcolor: 'button.hover', borderRadius:5}
+                            <Button onClick={handleSignOut} size='mid'sx={{ color:'common.black', position: 'absolute', left: 200, bgcolor: 'button.ask', borderRadius:2, whiteSpace: 'nowrap', minWidth: 'auto', boxShadow: 1,'&:hover': {bgcolor: 'button.hover', borderRadius:5, boxShadow: 1}
                                 }}>Sign Out
                             </Button>
                         }

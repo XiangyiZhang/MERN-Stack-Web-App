@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, Container, Stack, Typography, Button} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { alpha } from "@mui/material/styles";
 
 export default function Answer({ans}){
     const theme = createTheme({
@@ -34,7 +35,7 @@ export default function Answer({ans}){
                         pl: 2,
                         pr: 2,
                         borderBottom:1,
-                        boxShadow:1,
+                        boxShadow:8,
                         borderColor:'grey.light'
                     }}>
                     <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>
@@ -48,16 +49,20 @@ export default function Answer({ans}){
                     </Typography>
                     <Stack spacing={2} direction="row" sx= {{mt : 2, mb : 1}}>
                         <Button variant="text" size = 'small' sx={{
+                            boxShadow:1,
                             bgcolor:'button.unpressed',
                             '&:hover': {
                                 backgroundColor: '#99ddff',
                                 color: '#3c52b2',
                             },
+                            '&:active': {
+                                boxShadow:0
+                            },
                         }}>
                             <KeyboardArrowUpIcon/>
                             {!ans.likeCount ? 'Upvote' : ans.likeCount}
                         </Button>
-                        <Button variant="text" color='grey' size = 'small'>
+                        <Button variant="text" color='grey' size = 'small' sx={{boxShadow:1,'&:active': {boxShadow:0}}} >
                             Comments
                         </Button>
                     </Stack>
