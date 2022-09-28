@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Container, Stack, Divider, Typography, Button} from '@mui/material';
+import { Box, Container, Stack, Typography, Button} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
@@ -13,6 +13,7 @@ export default function Answer({ans}){
         palette: {
           grey: {
             main: '#9e9e9e',
+            light: '#cccccc',
             dark: '#616161',
           },
           button: {
@@ -32,6 +33,9 @@ export default function Answer({ans}){
                         pt: 2,
                         pl: 2,
                         pr: 2,
+                        borderBottom:1,
+                        boxShadow:1,
+                        borderColor:'grey.light'
                     }}>
                     <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>
                         如何评价这个网站？
@@ -57,7 +61,6 @@ export default function Answer({ans}){
                             Comments
                         </Button>
                     </Stack>
-                    <Divider/>
                 </Box>
             </Container>
         </ThemeProvider>

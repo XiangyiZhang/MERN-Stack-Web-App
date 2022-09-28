@@ -13,11 +13,11 @@ export const getQuestions = async (req, res) => {
 }
 
 export const createQuestion = async (req, res) =>{
-    var { title, description, tags, askedBy } = req.body;
+    var { title, description, tags } = req.body;
     if(title.charAt(title.length-1) !== '?' && title.charAt(title.length-1) !== '？'){
         title = title + '?';
     }
-    const newQuestion = new Question({title, description, tags, askedBy});
+    const newQuestion = new Question({title, description, tags, askedBy: req.userId});
     try{
         await newQuestion.save();
         res.status(201).json(newQuestion);

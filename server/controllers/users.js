@@ -2,6 +2,7 @@ import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
+const EXPIRATION_TIME = '2h';
 const ROUNDS = 10;
 const SECRET = 'quohoo_secret';
 
@@ -44,5 +45,5 @@ export const verifyUser = async (req, res) => {
 
 
 const generateToken = (user) => {
-    return jwt.sign({data: user}, SECRET, {expiresIn: '24h'});
+    return jwt.sign({username: user.username, id: user._id}, SECRET, {expiresIn: EXPIRATION_TIME});
 }

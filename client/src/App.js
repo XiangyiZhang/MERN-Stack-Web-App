@@ -2,10 +2,12 @@ import React, { useState, useEffect }from 'react';
 import { Toolbar } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter, Routes, Route, Redirect } from 'react-router-dom';
 import decode from 'jwt-decode';
 
 import NavBar from './components/NavBar/NavBar';
 import Answers from './components/Answers/Answers';
+import QuestionPage from './components/QuestionPage/QuestionPage';
 import QuestionForm from './components/QuestionForm/QuestionForm';
 import theme from './theme';
 import { loadAns } from './slices/answerSlice';
@@ -41,7 +43,12 @@ const App = () => {
         <ThemeProvider theme={theme}>  
             <NavBar user={user} token={token} handleOpenQuestionForm={handleOpenQuestionForm} handleOpenSigninForm={handleOpenSigninForm}/>
             <Toolbar />
-            <Answers style={{positon:'abosolute',top:100}} />
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' exact element={<Answers/>} />
+                    <Route path='/question/:id' element={<QuestionPage/>} />
+                </Routes>
+            </BrowserRouter>
             <QuestionForm user={user} token={token} open = {openQuestionForm} handleClose = {handleCloseQuestionForm}/>
             <SignInForm open = {openSigninForm} handleClose = {handleCloseSigninForm}/>
         </ThemeProvider>

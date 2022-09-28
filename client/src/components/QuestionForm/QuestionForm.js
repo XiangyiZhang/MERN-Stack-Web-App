@@ -18,7 +18,6 @@ const QuestionForm = ({user, token, open, handleClose }) => {
         addQuestion({
             title: questionInfo.title, 
             description: questionInfo.description, 
-            askedBy:user._id
         });
     };
     if(!user){
