@@ -2,6 +2,7 @@ import React, { useState, useEffect }from 'react';
 import { Toolbar } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import decode from 'jwt-decode';
 
 import NavBar from './components/NavBar/NavBar';
 import Answers from './components/Answers/Answers';
@@ -9,12 +10,11 @@ import QuestionForm from './components/QuestionForm/QuestionForm';
 import theme from './theme';
 import { loadAns } from './slices/answerSlice';
 import { loadQuestions } from './slices/questionSlice';
-import { selectUser, selectToken } from './slices/authSlice';
+import { selectUser, selectToken, logOut } from './slices/authSlice';
 import SignInForm from './components/SignInForm/SignInForm';
 
 const App = () => {
     const { user } = useSelector(selectUser);
-    //const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const { token } = useSelector(selectToken);
 
     const [openQuestionForm, setOpenQuestionForm] = React.useState(false);
@@ -28,11 +28,13 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(user);
+        if(token){
+            const decodedToken = decode(token);
+            if (decodedToken.exp * 1000 < new Date().getTime()){dispatch(logOut())};
+        }
         dispatch(loadQuestions());
         dispatch(loadAns());
-        
-    })
+    },[token])
 
     return(
         //<SignIn></SignIn>
