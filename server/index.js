@@ -17,7 +17,7 @@ app.use(cors({
 }));
 
 
-app.use('/', entryRoutes);
+app.use('/main', entryRoutes);
 app.use('/auth', authRoutes);
 app.use('/questions', qRoutes);
 

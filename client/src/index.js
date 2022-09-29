@@ -12,6 +12,7 @@ import App from "./App.js";
 import answerRedcuer from './slices/answerSlice';
 import questionReducer from './slices/questionSlice';
 import authReducer from './slices/authSlice';
+import qPageReducer from './slices/qPageSlice';
 
 const store = configureStore({
     reducer: {
@@ -19,6 +20,8 @@ const store = configureStore({
         questions: questionReducer,
         user: authReducer,
         token: authReducer,
+        qPageQuestion:qPageReducer,
+        qPageAnswers:qPageReducer,
     }
 })
 

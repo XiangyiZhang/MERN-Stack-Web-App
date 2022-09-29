@@ -10,11 +10,13 @@ API.interceptors.request.use((req) => {
 });
 
 // Questions api
-export const addQuestion = (formData) => API.post('/', formData);
+export const addQuestion = (formData) => API.post('/main', formData);
 export const fetchAllQuestions = () => API.get('/questions');
+export const fetchQuestionAndAns = (id) => API.get(`/questions/${id}`);
 
 // Answers api
-export const fetchAllAns = () => API.get('/');
+export const fetchAllAns = () => API.get('/main');
+export const postAnswer = (formData, id) => API.post(`/questions/${id}`, formData);
 
 // Auth api
 export const signIn = (user) => API.post('/auth/signin', user);

@@ -29,7 +29,7 @@ export default function Question({question}){
                         boxShadow:8, borderBottom:1, borderColor:'grey.light'
                     }}>
                     <Typography variant='body2' color = 'grey.dark' sx={{  }}>
-                        A question is waiting for your answer
+                        {question.askedBy?.username}'s question is waiting for your answer
                     </Typography>
                     <LinkMaterial variant='subtitle1' component={LinkReactRouter} to={`/question/${question._id}`} sx={{ fontWeight: 'bold', color:"common.black", textDecoration: "none", "&:hover": {}}} >
                         {question.title}

@@ -27,6 +27,7 @@ export const questionSlice = createSlice({
     extraReducers:{
         [addQuestion.fulfilled](state, { payload }){
             state.questions = [...state.questions, payload];
+            window.location.reload(false);
         },
         [loadQuestions.fulfilled](state, { payload }){
             state.questions = payload;

@@ -1,48 +1,23 @@
 import * as React from 'react';
 import { Box, Container, Stack, Typography, Button} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { alpha } from "@mui/material/styles";
 
-export default function Answer({ans}){
-    const theme = createTheme({
-        typography: {
-            button: {
-              textTransform: 'none'
-            }
-        },
-        palette: {
-          grey: {
-            main: '#9e9e9e',
-            light: '#cccccc',
-            dark: '#616161',
-          },
-          button: {
-            unpressed: '#cceeff',
-          },
-          background: {
-            paper: '#fff',
-          }
-        },
-    });
+import theme from './theme';
+
+export default function Answer({ans, isMainPage}){
+    
     return(
         <ThemeProvider theme={theme}>
             <Container sx={{width: 800 }}r>
                 <Box 
-                    sx={{
-                        bgcolor: 'background.paper',
-                        pt: 2,
-                        pl: 2,
-                        pr: 2,
-                        borderBottom:1,
-                        boxShadow:8,
-                        borderColor:'grey.light'
+                    sx={{ bgcolor: 'background.paper', pt: 2, pl: 2, pr: 2, borderBottom:1, boxShadow:8, borderColor:'grey.light'
                     }}>
                     <Typography variant='subtitle1' sx={{ fontWeight: 'bold' }}>
-                        如何评价这个网站？
+                        {isMainPage?ans.question?.title:''}
                     </Typography>
-                    <Typography variant='subtitle2' color = 'grey.main'>
-                        李白
+                    <Typography variant={isMainPage?'subtitle2':'subtitle1'} color = {isMainPage?'grey.dark':'common.black'} sx={{ fontWeight: isMainPage?'':'bold'}}>
+                        {ans.author?.username}
                     </Typography>
                     <Typography variant='body2'>
                         {ans.content}

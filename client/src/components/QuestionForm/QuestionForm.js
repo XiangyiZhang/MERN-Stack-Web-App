@@ -1,4 +1,4 @@
-import { Modal, Box, Button, TextField, InputAdornment, Fade, Typography } from '@mui/material';
+import { Modal, Box, Button, InputBase, InputAdornment, Fade, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { addQuestion } from '../../api';
 
@@ -8,8 +8,9 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 500,
-    bgcolor: 'background.paper',
+    bgcolor: '#f2f2f2',
     p: 4,
+    boxShadow:4,
   };
 
 const QuestionForm = ({user, token, open, handleClose }) => {
@@ -39,20 +40,16 @@ const QuestionForm = ({user, token, open, handleClose }) => {
         >
             <Fade in={open}>
                 <Box sx={style}>
-                    <TextField 
-                        fullWidth 
-                        variant="standard"
+                    <InputBase 
+                        fullWidth
                         placeholder="What would you like to know"
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">?</InputAdornment>,
-                            style: {fontSize: 25}
-                        }}
                         required
                         autoFocus={true}
                         value={questionInfo.title}
                         onChange={(e)=> setQuestionInfo({...questionInfo, title: e.target.value})}
+                        sx={{p:1, borderTop:5, borderColor: '#7094db',fontSize:25, fontWeight:600, boxShadow:4, bgcolor:"common.white"}}
                     />
-                    <TextField
+                    <InputBase
                         multiline
                         placeholder="Write some description to help others better understand your question (optional)."
                         fullWidth
@@ -63,7 +60,7 @@ const QuestionForm = ({user, token, open, handleClose }) => {
                         onChange={(e)=> setQuestionInfo({...questionInfo, description: e.target.value})}
                     />
                     <Button 
-                        sx={{borderRadius:5, float:'right'}}
+                        sx={{borderRadius:1, float:'right'}}
                         variant='contained'
                         type='submit'
                         onClick={handleSubmit}

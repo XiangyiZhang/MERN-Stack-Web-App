@@ -28,14 +28,15 @@ const App = () => {
     const handleCloseSigninForm = () => setOpenSigninForm(false);
 
     const dispatch = useDispatch();
-
+    useEffect(() => {
+        dispatch(loadQuestions());
+        dispatch(loadAns());
+    })
     useEffect(() => {
         if(token){
             const decodedToken = decode(token);
             if (decodedToken.exp * 1000 < new Date().getTime()){dispatch(logOut())};
         }
-        dispatch(loadQuestions());
-        dispatch(loadAns());
     },[token])
 
     return(

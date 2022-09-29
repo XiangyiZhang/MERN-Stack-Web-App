@@ -9,8 +9,8 @@ import { selectQuestions } from '../../slices/questionSlice';
 
 const Answers = () => {
 
-    const { answers } = useSelector(selectAns);
     const { questions } = useSelector(selectQuestions);
+    const { answers } = useSelector(selectAns);
 
     return (
         !answers && !questions? <CircularProgress/> : (
@@ -22,7 +22,7 @@ const Answers = () => {
             </div>
             <div>
                 {answers.map((ans, index) => (
-                    <Answer ans={ans} key = {index}/>
+                    <Answer isMainPage={true} ans={ans} key = {index}/>
                 ))}
             </div>
             
